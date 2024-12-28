@@ -10,28 +10,8 @@ app.use(express.json());
 
 app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
 let users=[];
-function authenticate_user(uname,password){
-    let validatedUser=users.filter((user)=>{
-        return (user.username===uname && user.password===password);
-    })
-    return validatedUser.length>0;
 
-}
 app.use("/customer/auth/*", function auth(req,res,next){
-    // let username=req.body.username;
-    // let password=req.body.password;
-    // //if username,pass missing
-    // if(username==''||password==''){
-    //     return res.status(402).send({"message":"Error logging in, please try again!"});
-    // }
-    // if(authenticate_user(username,password)){
-    //     //if user authenticated, then generate jwt access token
-    //     let accessToken=jwt.sign({data:password},'access',{ expiredIn:60*60});
-
-    // }else{
-    //     return res.status(208).json({ message: "Invalid Login. Check username and password" });
-
-    // }
     
     //check if user is logged in and has valid access token
     if(req.session.authorization){
